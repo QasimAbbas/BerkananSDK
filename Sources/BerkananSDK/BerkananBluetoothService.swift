@@ -24,6 +24,7 @@ public protocol BerkananBluetoothServiceDelegate: class {
   /// - Parameters:
   ///   - service: The local service that discovered the `remoteService`.
   ///   - remoteService: The remote service discovered by the local `service`.
+
   func berkananBluetoothService(
     _ service: BerkananBluetoothService,
     didDiscover remoteService: BerkananBluetoothService
@@ -58,6 +59,8 @@ public protocol BerkananBluetoothServiceDelegate: class {
 ///
 /// Be prepared to receive messages that your app doesn't know how to handle —
 /// examine the `payloadType` of the received `Message`.
+
+@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public class BerkananBluetoothService: NSObject {
   
   /// The delegate assigned with this object.
@@ -70,21 +73,19 @@ public class BerkananBluetoothService: NSObject {
   /// Combine version of the `berkananBluetoothService(_:didDiscover:)` delegate method.
   ///
   /// Note: Events are not delivered on the main thread.
-  @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+
   lazy public private(set) var discoverServiceSubject =
     PassthroughSubject<BerkananBluetoothService, Never>()
   
   /// Convenience publisher to keep track of the number of services in range.
   ///
   /// Note: Events are not delivered on the main thread.
-  @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   lazy public private(set) var numberOfServicesInRangeSubject =
     PassthroughSubject<Int, Never>()
   
   /// Combine version of the `berkananBluetoothService(_:didReceive:)` delegate method.
   ///
   /// Note: Events are not delivered on the main thread.
-  @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
   lazy public private(set) var receiveMessageSubject =
     PassthroughSubject<Message, Never>()
   
